@@ -16,6 +16,7 @@ end
 group :openid do
   gem "ruby-openid", "~> 2.3.0", :require => "openid"
   gem "rack-openid"
+  gem 'ruby-openid-apps-discovery'
 end
 
 # Optional gem for exporting the gantt to a PNG file, not supported with jruby

@@ -198,12 +198,11 @@ class AccountController < ApplicationController
 
   def open_id_authenticate(openid_url)
     back_url = signin_url(:autologin => params[:autologin])
-    authenticate_with_open_id(
-          openid_url, :required => [:nickname, :fullname, :email],
-          :return_to => back_url, :method => :post
-    ) do |result, identity_url, registration|
+    openid_url = OpenIdAuthentication.normalize_identifier(openid_url) if openid_url.present?
+
+    authenticate_with_open_id(openid_url,  :required => ["http://schema.openid.net/contact/email"],  :return_to => signin_url,  :method => :post) do |result,  identity_url,  registration|
       if result.successful?
-        user = User.find_or_initialize_by_identity_url(identity_url)
+        user = User.find_by_mail(registration.get_extension_args["value.ext0"])
         if user.new_record?
           # Self-registration off
           (redirect_to(home_url); return) unless Setting.self_registration?
