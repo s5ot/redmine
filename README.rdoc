@@ -1,5 +1,3 @@
 = Redmine
 
-Redmine is a flexible project management web application written using Ruby on Rails framework.
-
-More details can be found in the doc directory or on the official website http://www.redmine.org
+ユーザーは事前に登録済みの前提で、Google Apps アカウントのOpenID認証で取得したメールアドレスとユーザーのメールアドレスが一致する場合に認証成功とするシナリオを実現するためにパッチを当てました。
